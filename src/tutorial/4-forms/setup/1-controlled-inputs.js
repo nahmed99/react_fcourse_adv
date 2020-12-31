@@ -18,6 +18,8 @@ const ControlledInputs = () => {
   // the function in App.js).
   const handleSubmit = (event) => {
 
+    // To prevent this function running upon initial entry, but to wait for
+    // button click (or form submit - whichever one has been setup).
     event.preventDefault();
 
     if (firstName && email) {
@@ -31,6 +33,7 @@ const ControlledInputs = () => {
       //key and value have the same name:
       //
       const newPerson = {
+                          id: new Date().getTime().toString(),
                           firstName, 
                           email
                         };
@@ -46,7 +49,7 @@ const ControlledInputs = () => {
       // reset the form input fields
       setFirstName('');
       setEmail('');
-      console.log(newPerson);
+      // console.log(newPerson);
 
     } else {
       console.log("Empty value(s)");
@@ -88,6 +91,21 @@ const ControlledInputs = () => {
           <button type='submit' onClick={handleSubmit}>Add Person</button>
           
         </form>
+
+        {
+          people.map((person) => {
+            // Destructure the person object - including an id to 'uniqueify' 
+            // list items (as required by React) 
+            const {id, firstName, email} = person;
+            return (
+              <div className="item" key={id}>
+                <h4>{firstName}</h4>
+                <p>{email}</p>
+
+              </div>
+            )
+          })
+        }
       </article>
     </>
   );
