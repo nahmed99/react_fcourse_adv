@@ -9,6 +9,7 @@ const ControlledInputs = () => {
 
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
+  const [people,setPeople] = useState([]);
 
   // By default, the browser will submit the form and then handle the submit.
   // For the function below to be of any use, we need to use event.preventDefault().
@@ -16,8 +17,41 @@ const ControlledInputs = () => {
   // were working in a file lower down the hierarchy - that function call-backed 
   // the function in App.js).
   const handleSubmit = (event) => {
+
     event.preventDefault();
-    console.log('kidda dunya?');
+
+    if (firstName && email) {
+      //
+      // const newPerson = {
+      //                     firstName: firstName, 
+      //                     email: email
+      //                   };
+      //
+      // In ES6, there is a shorter way to do the above - if the
+      //key and value have the same name:
+      //
+      const newPerson = {
+                          firstName, 
+                          email
+                        };
+
+      // setPeople(newPerson); - This will overwrite the previous contents of 
+      // the array, so use the arrow function approach below (as was done in 
+      // one of the previous examples), and the spread operator...this way we
+      // retain the previous elements in the array too!
+      setPeople((people) => {
+        return [...people, newPerson]
+      });
+
+      // reset the form input fields
+      setFirstName('');
+      setEmail('');
+      console.log(newPerson);
+
+    } else {
+      console.log("Empty value(s)");
+    }
+    
   };
 
 
