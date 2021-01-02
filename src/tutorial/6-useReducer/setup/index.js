@@ -9,9 +9,9 @@ const reducer = (state, action) => {
 
 
 const defaultState = {
-   people: data,
-   isModalOpen: true,
-   modalContent: 'hello world'
+   people: [],
+   isModalOpen: false,
+   modalContent: ''
 }
 
 
